@@ -4,8 +4,6 @@
 Data-focused analyst with over a decade of private and government strategic and operational analysis. Living in San Diego and enjoying the best of life.
 
 1. Develop technical and experiential proficiency in industry relevant skillsets.
-    * hdhdh
-
 3. Position myslef for new growth oppurtunities and use my skills in a setting I am passionate about... for myself or an employer.
 4. Build a network of like-minded professional and social connections
 5. Have FUN!
