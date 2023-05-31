@@ -4,9 +4,9 @@
 Data-focused analyst with over a decade of private and government strategic and operational analysis. Living in San Diego and enjoying the best of life.
 
 1. Develop technical and experiential proficiency in industry relevant skillsets.
-1. Position myslef for new growth oppurtunities and use my skills in a setting I am passionate about... for myself or an employer.
-1. Build a network of like-minded professional and social connections
-1. Have FUN!
+3. Position myslef for new growth oppurtunities and use my skills in a setting I am passionate about... for myself or an employer.
+4. Build a network of like-minded professional and social connections
+5. Have FUN!
 
 ### Interesting reads for intro to Py:
 [Discussions: Python for Everybody (PY4E)](https://www.py4e.com/discussions)
