@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Carlos C/Code/SavvyCoders/Homework/section9/SQLCleaningLab.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="2671"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainevCars"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="SavvyCoders_SQL_CleaningLab" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="113"/><column index="2" value="300"/><column index="3" value="81"/><column index="4" value="121"/><column index="5" value="86"/><column index="6" value="120"/><column index="7" value="135"/><column index="8" value="252"/><column index="9" value="168"/><column index="10" value="163"/><column index="11" value="123"/><column index="12" value="111"/><column index="13" value="76"/><column index="14" value="118"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="evCars" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="113"/><column index="2" value="300"/><column index="3" value="81"/><column index="4" value="121"/><column index="5" value="86"/><column index="6" value="120"/><column index="7" value="135"/><column index="8" value="252"/><column index="9" value="168"/><column index="10" value="163"/><column index="11" value="123"/><column index="12" value="111"/><column index="13" value="76"/><column index="14" value="118"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- CREATE TABLE Person1(
+-- fistname TEXT,
+-- lastname TEXT,
+-- age NUMERIC
+-- );
+
+-- INSERT INTO Person1 (fistname, lastname, age)
+-- VALUES (&quot;Carlos&quot;, &quot;Cortes&quot;, 29)
+
+-- SELECT County, City, State FROM EVRegistry
+
+-- SELECT
+-- Make,
+-- Model,
+-- ModelYear as year,
+-- BaseMSRP/60 as Monthlypayment
+-- FROM EVRegistry
+-- WHERE State = &quot;WA&quot;
+
+-- SELECT DISTINCT
+-- 	Make as make,
+-- 	Model as model,
+-- 	ElectricRange as &quot;range&quot;
+-- FROM
+-- 	EVRegistry
+-- WHERE ElectricRange &gt;= 250
+
+-- SELECT sum(dollars) as &quot;Total Dollars&quot;
+-- From EVCharging
+
+-- SELECT *
+-- FROM EVRegistry
+-- WHERE VIN like &quot;1N4AZ%&quot;
+
+-- SELECT
+-- 	ModelYear,
+-- 	Make,
+-- 	Model,
+-- 	ElectricVehicleType
+-- 	ElectricRange,
+-- FROM EVRegistry
+-- WHERE Make like &quot;TESLA&quot;
+-- ORDER by ModelYear
+-- limit 3
+
+-- SELECT weekday, Count() as total
+-- from EVCharging
+-- GROUP by weekday 
+
+-- SELECT locationId, count(DISTINCT StationId) as &quot;# of stations&quot;
+-- from EVCharging
+-- group by locationId
+
+-- SELECT ModelYear, Make, Model, ElectricVehicleType, ElectricRange
+-- FROM EVRegistry
+-- Where Make like &quot;tesla&quot;
+-- Order By Make, Model DESC
+
+-- SELECT ModelYear, Make, Model, ElectricVehicleType, ElectricRange
+-- FROM EVRegistry
+-- Where Make like &quot;tesla&quot;
+-- Order By Make, Model
+-- LIMIT 10
+
+-- SELECT count(DISTINCT userId) as numUser
+-- FROM EVCharging
+
+-- SELECT userId, Count(stationId)
+-- FROM EVCharging
+-- GROUP by userId
+-- Order by count(DISTINCT stationId) DESC
+-- limit 10
+
+-- SELECT userID, round(avg(DISTINCT kwhTotal),2) as avgPower
+-- FROM EVCharging
+-- group by userId
+
+-- HAVING min(chargeTimeHrs)&gt;=0
+-- ORDER by 2,3
+
+-- SELECT
+-- 	userId,
+-- 	sum(chargeTimeHrs) as totalTimeHrs,
+-- 	sum(kwhTotal) as totalPwrKwH
+-- FROM EVCharging
+-- Group by 1
+-- ORDER by 3 DESC
+-- LIMIT 5
+
+-- 2. Using the EVCharging Table,  Find the total time spent charging (`totalTimeHrs`), and the total power consumed(`totalPwrKwh`)
+-- from charging EV's by each User on Thursdays. Round the answers to 2 deciaml points and list the out put in highest to lowest order.
+-- Limit the order to the top 25 users.
+-- SELECT userId, round(sum(chargeTimeHrs),2) as totalTimeHrs, round(sum(kwhTotal),2) as totalPwrKwH
+-- FROM EVCharging
+-- Where weekday like &quot;thu%&quot;
+-- GROUP by userId
+-- ORDER by 3 DESC
+-- limit 25
+
+-- SELECT du.carMake, count(*) as numCharges, round(Sum(fc.chargetimeHrs),2) as 
+-- FROM TABLE1 a
+-- inner JOIN TABLE2 b
+-- on a.key = b.key
+
+
+-- *****Let's find out the number of charges and the total time spent charging for each car make on Thursday's.*****
+-- Return carMake, numCharges, timeChargeHrs and order the result set from highest to lowest time spent charging.
+
+-- SELECT du.carMake, dd.dayOfWeek, count(*) as &quot;numCharges&quot;, round(sum(fc.chargetimehrs),2) as &quot;totalTime&quot;
+-- FROM factCharge fc
+-- INNER JOIN dimUser du ON fc.userId = du.userId
+-- INNER JOIN dimDay dd ON fc.DayID = dd.dateKey
+-- WHERE dd.dayOfWeek = 'Thursday'
+-- GROUP By du.carMake, dd.dayOfWeek
+-- ORDER By 3 DESC
+
+-- Find out the number of charges by facility and model of car.*******
+-- Return typeFacility, carMake and numStation.
+-- Order the result set by
+-- type of facility and highest to lowest number of charges.
+
+-- SELECT df.typeFacility, du.carMake, count(fc.stationId) as &quot;numStation&quot;
+-- FROM factCharge fc
+-- INNER JOIN dimFacility df on fc.facilityID = df.FacilityKey
+-- Inner JOIN dimUser du on fc.userId = du.userId
+-- GROUP By 1, 2
+-- ORDER By 1,3 DESC
+
+-- Find out which cars each distinct user has.
+-- We know that not all cars ar listed in the car table
+-- but we still want to include all userids in the result set.
+-- Order the result set by car make in a-z order.
+
+-- SELECT DISTINCT fc.userId, dc.carMake,  dc.carModel
+-- FROM factCharge fc
+-- INNER JOIN dimUser du ON fc.userId = du.userId 
+-- LEFT JOIN dimCar dc ON du.carID = dc.carID 
+-- ORDER BY dc.carMake
+
+-- 1. Use LEFT JOIN and join `factcharge` and `dimFacility` together.
+-- Select all of the rows and order the output by `typeFacility`.
+
+-- SELECT fc.facilityID, df.typeFacility
+-- FROM factCharge fc
+-- LEFT JOIN dimFacility df
+-- 	on df.FacilityKey = fc.facilityID
+-- ORDER by df.FacilityKey DESC
+
+-- Using EVregistry, Write a query to select the ModelYear, Make,
+-- and Model off all of the vehicles in the registry
+
+
+
+1. 
+
+SELECT 
+FROM EVRegistry
+
+-- 2. Using the EVRegistry table, Write a query that lists all of the unique types of EV's.
+-- your reult set should have one column, ElectricVehicleType.
+
+SELECT ElecticVehicleType
+FROM EVRegistry
+
+-- 3. Using the EVRegistry, Write a query that shows
+-- all of the information on Battery Electric Vehicles (BEV)
+-- that are in the registry.
+
+SELECT *
+FROM EVRegistry
+WHERE ElectricVehicleType like &quot;Bat%&quot;
+
+-- 4. Using the EVRegistry, wirte a query that returns the `Make` and `Model`
+-- of all of the EV's that have a BaseMSRP between 20000 and 35000?  
+SELECT make, Model
+FROM EVRegistry
+WHERE BaseMSRP &gt;20000 AND BaseMSRP &lt;35000
+
+-- -- 7.2 Questions -- -- 
+
+-- 1. Using EVRegistry, write a query to find a record 
+-- where the `City` attribute is NULL. Return all of the available columns. 
+SELECT *
+FROM EVRegistry
+WHERE City is NULL
+
+-- 2. Write a query to find the `make`, `model`, and `ElectricVehicleType`
+-- where the VIN number has  that ends in '3E1EA1J'.
+SELECT make, Model, ElectricVehicleType, VIN
+FROM EVRegistry
+WHERE VIN like &quot;%3E1EA1J&quot;
+
+-- 3. Select the `ModelYear`, `make`, `model`, `ElectricVehicleType`,
+-- and `range` of the Tesla vehicles or cheverolet vehicles in the registry.
+-- Order the result set by Make and Model year in from newest to oldest. 
+
+SELECT ModelYear, Make,	 Model, ElectricVehicleType
+FROM EVRegistry
+WHERE make = &quot;TESLA&quot; or Make like &quot;Chev%&quot;
+ORDER by 1,2 DESC
+
+-- 4. Using EVCharging, Write a query to
+-- find out how many many times those stations were used. 
+-- Order them by the most used to the least used and
+-- limit the output to 5 records. 
+
+SELECT stationId, Count(*) as &quot;numUsage&quot;
+FROM EVCharging
+Group by stationId
+ORDER By 2 DESC
+LIMIT 5
+
+-- 5. Using EVCharging, For the folks who charged longer than 0.5 hours,
+-- show the min and max of the charging time for each user.
+-- Your output columns should be `userid`, `minTime`, and `maxTime`.
+-- Order this result set by the last two columns respectively.
+
+SELECT userId, min(chargetimehrs) as minTime, max(chargeTimeHrs) as maxTime 
+FROM EVCharging
+group by userId HAVING minTIme &gt; 0.5
+ORDER by 2,3
+
+-- -- 7.2 Questions -- -- 
+
+-- 1. Using EVCharging, Which day of the week
+-- has the highest average charging time?
+-- Round the answer to 2 decimal points.
+
+SELECT Weekday, round(avg(chargetimeHrs), 2) as &quot;Highest avg&quot;
+FROM EVCharging
+GROUP by weekday
+ORDER by 2 DESC
+
+-- 2. Using, EV charging, Find the total power consumed from charging EV's
+-- by each User. Return the `userId` and name the calculated column,
+-- `totalPower`. Round the answer to 2 deciaml points and
+-- list the out put in highest to lowest order.
+-- Limit the order to the top 15 users. 
+
+SELECT userID, round(SUM(KwhTotal),2) as totalPower
+FROM EVCharging
+GROUP By userId
+ORDER By totalPower DESC
+LIMIT 5
+
+-- 3. Using dimfacility and factCharge, write a query to find out which type 
+-- of facility (GROUP BY) has the most amount of charging stations.
+-- Return `type Facility` and name the calculated column `numStation`.
+-- Order the result set from highest to lowest number of charging stations.
+
+SELECT df.typeFacility, count(fc.stationID) as num_Stations 
+FROM factCharge fc
+Inner JOIN dimFacility df on fc.facilityID = df.FacilityKey
+GROUP by 1
+Order By 2 DESC
+
+-- 4. Primary keys are the unique identifier of an entry,
+-- foreign keys can be referenced in a table from a different table.</sql><sql name="Class Assignment">SELECT accel as Accelerations, rtrim(Accel, &quot; sec&quot;) as &quot;Corrected Accel&quot;
+FROM evCars
+
+UPDATE evCars
+SET Accel = rtrim(Accel, &quot; sec&quot;)
+
+ALTER TABLE evCars
+RENAME &quot;Accel&quot; TO &quot;accelSec&quot;
+
+SELECT accelSec
+FROM evCars
+
+SELECT TopSpeed, Range, efficiency, FastCharge
+FROM evCars
+LIMIT 10
+
+SELECT TopSpeed, RTRIM(TopSpeed, &quot;km/h&quot;)
+FROM evCars 
+
+UPDATE evCars
+SET TopSpeed = RTRIM(TopSpeed, &quot;km/h&quot;)
+
+SELECT TopSpeed
+FROM evCars 
+
+SELECT TopSpeed, round(TopSpeed * 0.621371, 2)
+FROM evCars
+
+UPDATE evCars
+SET TopSpeed = round(TopSpeed * 0.621371, 2)
+
+SELECT TopSpeed
+FROM evCars
+
+ALTER TABLE evCars
+RENAME TopSpeed TO topSpeedMPH
+
+SELECT topSpeedMPH
+FROM evCars
+
+SELECT * 
+FROM evCars
+
+-- Section 2 Part 2 -&gt; 3 -&gt; 4.
+
+SELECT
+	topSpeed,
+	RTRIM(topSpeed, &quot; mph&quot;),
+	Efficiency,
+	RTRIM(Efficiency, &quot; Wh/km&quot;),
+	FastCharge,
+	RTRIM(FastCharge, &quot; km/h&quot;)
+FROM evCars 
+
+UPDATE evCars
+SET Efficiency = RTRIM(Efficiency, &quot; Wh/km&quot;)
+
+UPDATE evCars
+SET FastCharge = RTRIM(FastCharge, &quot; km/h&quot;)
+
+SELECT Efficiency, FastCharge
+FROM evCars 
+
+SELECT FastCharge, round(FastCharge * 0.621371, 2)
+FROM evCars
+
+UPDATE evCars
+SET FastCharge = round(FastCharge * 0.621371, 2)
+
+SELECT FastCharge
+FROM evCars
+
+ALTER TABLE evCars
+RENAME fastChargeKmHr TO OneHourFastChargeMiles
+
+SELECT OneHourFastChargeMiles
+FROM evCars
+
+SELECT RapidCharge, count(RapidCharge)
+FROM evCars
+GROUP BY RapidCharge
+
+UPDATE evCars
+SET RapidCharge = &quot;FALSE&quot;
+WHERE RapidCharge = &quot;Rapid charging not possible&quot;
+
+UPDATE evCars
+SET RapidCharge = &quot;TRUE&quot;
+WHERE RapidCharge = &quot;Rapid charging possible&quot;
+
+SELECT PowerTrain, count(PowerTrain)
+FROM evCars
+GROUP By 1
+
+UPDATE evCars
+SET PowerTrain = &quot;AWD&quot;
+WHERE PowerTrain = &quot;All Wheel Drive&quot;
+
+UPDATE evCars
+Set PowerTrain = &quot;RWD&quot;
+WHERE PowerTrain = &quot;Rear Wheel Drive&quot;
+
+UPDATE evCars
+Set PowerTrain = &quot;FWD&quot;
+Where PowerTrain = &quot;Front Wheel Drive&quot;
+
+SELECT PriceEuro, round(PriceEuro * 1.09,2) as PriceUSD
+FROM evCars
+
+UPDATE evCars
+Set PriceEuro = round(PriceEuro * 1.09,2)
+
+SELECT PriceEuro
+FROM evCars
+
+ALTER TABLE evCars
+RENAME PriceEuro TO &quot;PriceUSD&quot;
+
+SELECT PriceUSD
+FROM evCars</sql><current_tab id="1"/></tab_sql></sqlb_project>
